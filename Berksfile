@@ -34,7 +34,8 @@ site :opscode
 # cookbook "myserver", :path => "/code/myserver-cookbook"
 
 cookbook "apt"
-cookbook "postfix-ses", git: 'git://github.com/tarzan0820/chef-posttfix-ses.git'
+cookbook 'postfix'
+cookbook "postfix-ses", git: 'git://github.com/tarzan0820/chef-postfix-ses.git'
 cookbook "python"
 cookbook 'build-essential'
 cookbook "openssl"
