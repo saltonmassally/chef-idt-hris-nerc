@@ -38,6 +38,8 @@ default[:openerp][:sentry_dsn] = 'secret'
 default[:openerp][:aws_access_key] = 'secret'
 default[:openerp][:aws_secret_key] = 'secret'
 default[:openerp][:aws_s3_bucket] = ''
+default[:openerp][:static_http_document_root] = '/var/www/'
+default[:openerp][:static_http_url_prefix]= '/static'
 
 
 default[:openerp][:update_command] = 

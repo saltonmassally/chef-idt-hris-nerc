@@ -44,6 +44,10 @@ conf['sentry_dsn'] = <%=node[:openerp][:sentry_dsn]%>
 conf['aws_access_key'] = <%=node[:openerp][:aws_access_key]%>
 conf['aws_secret_key'] = <%=node[:openerp][:aws_secret_key]%>
 conf['aws_s3_bucket']  = <%=node[:openerp][:aws_s3_bucket]%>
+conf['static_http_document_root'] = <%=node[:openerp][:static_http_document_root]%>
+conf['static_http_enable'] = True
+conf['static_http_url_prefix'] = <%=node[:openerp][:static_http_url_prefix]%>
+
 
 # Optional database config if not using local socket
 conf['db_name'] = '<%=node[:openerp][:database][:name]%>'
