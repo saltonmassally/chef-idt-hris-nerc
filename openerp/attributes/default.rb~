@@ -1,0 +1,65 @@
+default[:openerp][:apt_packages] = %w[
+  libssl-dev
+  libsasl2-dev
+  libldap2-dev
+  libxml2-dev 
+  libxslt1-dev
+  graphviz
+  ghostscript
+  poppler-utils
+]
+
+default[:openerp][:pip_packages] = %w[
+  raven
+  raven-sanitize-openerp
+  wkhtmltopdf
+  boto
+]
+
+default[:openerp][:pip_packages_custom_repo] = %w[
+  pip install git+https://github.com/tarzan0820/zkemapi.git@master
+  pip install https://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
+  pip install --allow-unverified pyPdf pyPdf
+]
+  
+default[:openerp][:database][:name] = ''
+default[:openerp][:database][:host] = 'False'
+default[:openerp][:database][:password] = ''
+default[:openerp][:database][:user] = ''
+default[:openerp][:database][:maxconn] = 300
+
+default[:openerp][:requirement_file] = 'requirement.txt'
+default[:openerp][:settings_file] = 'etc/openerp/openerp.conf'
+default[:openerp][:data_dir] = '/mount/data'
+default[:openerp][:db_filter] = '.*'
+default[:openerp][:debug_mode] = 'False'
+default[:openerp][:email_from] = 'no-reply@example.com'
+
+default[:openerp][:admin_pass] = 'supersecret'
+default[:openerp][:addon_path] = 'openerp/addons/'
+default[:openerp][:sentry_dsn] = 'secret'
+default[:openerp][:aws_access_key] = 'secret'
+default[:openerp][:aws_secret_key] = 'secret'
+default[:openerp][:aws_s3_bucket] = ''
+default[:openerp][:update_command] = ''
+
+
+default[:openerp][:update_command] = 
+
+override['supervisor']['inet_port'] = '9001'
+
+node['nginx']['worker_processes']
+node['nginx']['gzip'] = 'on'
+
+#set the ff in stack settings
+# node['supervisor']['inet_username']
+# node['supervisor']['inet_password']
+#
+#
+#
+#
+#
+#
+#
+
+
