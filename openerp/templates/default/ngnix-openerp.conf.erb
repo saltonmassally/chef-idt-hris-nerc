@@ -1,6 +1,6 @@
 server {
    listen 80;
-   server_name ;
+   server_name <%=node[:openerp][:servername]%>;
    location / {
        proxy_pass http://127.0.0.1:8069;
        proxy_set_header Host $host;
@@ -10,13 +10,11 @@ server {
 }
 
 
-
-
-worker_processes 1;
+worker_processes <%=node['nginx']['worker_processes']%>;
 
 user nobody nogroup;
-pid /tmp/nginx.pid;
-error_log /var/nginx/error.log;
+pid <%=@deploy_path %>shared/pid/nginx.pid;
+error_log <%=@deploy_path %>shared/log/nginx-error.log;
 
 events {
     worker_connections 1024;
@@ -26,7 +24,7 @@ events {
 http {
     include mime.types;
     default_type application/octet-stream;
-    access_log /tmp/nginx.access.log combined;
+    access_log <%=@deploy_path %>shared/log/nginx.access.log combined;
     sendfile on;
 
     upstream app_server {
@@ -38,7 +36,7 @@ http {
     server {
         listen 80 default;
         client_max_body_size 4G;
-        server_name _;
+        server_name '';
 
         keepalive_timeout 5;
 
@@ -53,14 +51,16 @@ http {
         location @proxy_to_app {
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header Host $http_host;
+	    proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Scheme $scheme;
             proxy_redirect off;
-
-            proxy_pass   http://app_server;
+            proxy_pass   http://localhost:8069;
         }
 
-        error_page 500 502 503 504 /500.html;
+	error_page 500 502 503 504 /500.html;
         location = /500.html {
             root /path/to/app/current/public;
         }
+
     }
 }

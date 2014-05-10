@@ -13,6 +13,7 @@ include_recipe "supervisor"
 include_recipe "gunicorn"
 include_recipe "nginx::repo"
 include_recipe "nginx"
+include_recipe "nginx::http_stub_status_module"
 
 node[:openerp][:apt_packages].each do |pkg|
   package pkg do
@@ -33,10 +34,5 @@ supervisor_service "openoffice" do
   autorestart 'true'
 end
 
-
-template "/etc/nginx/sites-enabled/ngnix-openerp" do
-    source "ngnix-openerp.conf.erb"
-})
-end
 
 # lets copy the file the openoffice files over to init.d and add to run levels

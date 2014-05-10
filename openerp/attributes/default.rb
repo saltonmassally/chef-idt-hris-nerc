@@ -24,13 +24,13 @@ default[:openerp][:database][:host] = 'False'
 default[:openerp][:database][:password] = ''
 default[:openerp][:database][:user] = ''
 default[:openerp][:database][:maxconn] = 300
+default[:openerp][:servername] = 'hris.sl'
 
-default[:openerp][:requirement_file] = 'requirement.txt'
-default[:openerp][:settings_file] = 'etc/openerp/openerp.conf'
+
 default[:openerp][:data_dir] = '/mount/data'
 default[:openerp][:db_filter] = '.*'
 default[:openerp][:debug_mode] = 'False'
-default[:openerp][:email_from] = 'no-reply@example.com'
+default[:openerp][:email_from] = 'no-reply@hris.sl'
 
 default[:openerp][:admin_pass] = 'supersecret'
 default[:openerp][:addon_path] = 'openerp/addons/'
@@ -38,15 +38,15 @@ default[:openerp][:sentry_dsn] = 'secret'
 default[:openerp][:aws_access_key] = 'secret'
 default[:openerp][:aws_secret_key] = 'secret'
 default[:openerp][:aws_s3_bucket] = ''
-default[:openerp][:update_command] = ''
 
 
 default[:openerp][:update_command] = 
 
 override['supervisor']['inet_port'] = '9001'
 
-node['nginx']['worker_processes']
-node['nginx']['gzip'] = 'on'
+override['nginx']['worker_processes'] = 4
+override['nginx']['default_site_enabled'] = false
+override['nginx']['gzip'] = 'on'
 
 #set the ff in stack settings
 # node['supervisor']['inet_username']
