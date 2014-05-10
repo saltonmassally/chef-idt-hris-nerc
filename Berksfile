@@ -36,7 +36,7 @@ site :opscode
 cookbook "apt"
 cookbook "postfix-ses", git: 'git://github.com/tarzan0820/chef-posttfix-ses.git'
 cookbook "python"
-cookbook 'build-essential',
+cookbook 'build-essential'
 cookbook "openssl"
 cookbook "xfs"
 cookbook "aws"
