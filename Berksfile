@@ -2,6 +2,7 @@ site :opscode
 
 cookbook 'apt'
 cookbook 'postfix'
+cookbook 'idt_infra_tools', git: 'git://github.com/tarzan0820/chef-idt-infrac-common.git'
 cookbook 'python'
 cookbook 'build-essential'
 cookbook 'openssl'
