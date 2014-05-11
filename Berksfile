@@ -1,1 +1,4 @@
 site :opscode
+
+cookbook 'apt'
+
