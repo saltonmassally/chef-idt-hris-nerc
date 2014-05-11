@@ -66,11 +66,11 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     mode "0644"
     action :create
-    variables({
+    variables(
       :deploy_path => deploy[:absolute_document_root],
-      :log_file = >  '#{deploy[:absolute_document_root]}/shared/log/openerp.log'
-      :pid_file = >  '#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid'
-    })
+      :log_file =>  '#{deploy[:absolute_document_root]}/shared/log/openerp.log',
+      :pid_file =>  '#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid'
+    ) 
     notifies :restart, 'supervisor_service[gunicorn]'
   end
 
