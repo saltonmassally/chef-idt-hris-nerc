@@ -56,8 +56,8 @@ node[:deploy].each do |application, deploy|
     command "gunicorn openerp:service.wsgi_server.application -c #{deploy[:absolute_document_root]}openerp-wsgi.py"
     directory deploy[:absolute_document_root]
     user 'nobody'
-    autostart 'true'
-    autorestart 'true'
+    autostart true
+    autorestart true
   end
 
   template "#{deploy[:absolute_document_root]}openerp/conf/openerp.conf" do
