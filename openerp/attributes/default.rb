@@ -7,6 +7,9 @@ default[:openerp][:apt_packages] = %w[
   graphviz
   ghostscript
   poppler-utils
+  openoffice.org-base
+  openoffice.org-writer
+  openoffice.org-calc
 ]
 
 default[:openerp][:pip_packages] = %w[

@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'openoffice::headless'
-include_recipe 'openoffice::apps'
 include_recipe "supervisor"
 include_recipe "gunicorn"
 include_recipe "nginx::repo"
@@ -35,4 +33,4 @@ supervisor_service "openoffice" do
 end
 
 
-# lets copy the file the openoffice files over to init.d and add to run levels
+# lets copy the file the openoffice files over t init.d and add to run levels
