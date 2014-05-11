@@ -19,7 +19,6 @@ default[:openerp][:pip_packages] = %w[
   boto
   git+https://github.com/tarzan0820/zkemapi.git@master
   https://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
-  pip install --allow-unverified pyPdf pyPdf
 ]
   
 default[:openerp][:database][:name] = ''
