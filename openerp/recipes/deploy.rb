@@ -47,7 +47,7 @@ node[:deploy].each do |application, deploy|
     action :create
     variables({
     :deploy_path => deploy[:absolute_document_root],
-    :log_file =>  '#{deploy[:absolute_document_root]}/shared/log/openerp.log'.
+    :log_file =>  '#{deploy[:absolute_document_root]}/shared/log/openerp.log',
     :pid_file =>  '#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid'
   })    
   end
