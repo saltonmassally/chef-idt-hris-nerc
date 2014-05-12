@@ -39,6 +39,11 @@ node[:deploy].each do |application, deploy|
 #    EOH
 #  end
 
+  execute "install openerp" do
+    command "python setup.py install"
+    cwd deploy[:absolute_document_root]
+  end
+
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
     source "openerp-wsgi.py.erb"
     owner deploy[:user]
