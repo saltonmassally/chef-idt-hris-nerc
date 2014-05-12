@@ -5,6 +5,7 @@ default[:openerp][:apt_packages] = %w[
   libxml2-dev 
   libxslt1-dev
   graphviz
+  libevent-dev
   ghostscript
   poppler-utils
   openoffice.org-base
