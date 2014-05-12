@@ -16,6 +16,7 @@ default[:openerp][:apt_packages] = %w[
 default[:openerp][:pip_packages] = %w[
   raven
   raven-sanitize-openerp
+  gevent
   wkhtmltopdf
   boto
   git+https://github.com/tarzan0820/zkemapi.git@master
