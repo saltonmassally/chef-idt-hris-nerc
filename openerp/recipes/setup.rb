@@ -14,6 +14,7 @@ include_recipe "nginx"
 include_recipe "nginx::http_stub_status_module"
 include_recipe 'postgresql::client'
 
+
 node[:openerp][:apt_packages].each do |pkg|
   package pkg do
     action :install
