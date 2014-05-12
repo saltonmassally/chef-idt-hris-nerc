@@ -52,6 +52,9 @@ override['nginx']['worker_processes'] = 4
 override['nginx']['default_site_enabled'] = false
 override['nginx']['gzip'] = 'on'
 
+override['postgresql']['enable_pgdg_apt'] = true 
+override['postgresql']['version'] = '9.3'
+
 #set the ff in stack settings
 # node['supervisor']['inet_username']
 # node['supervisor']['inet_password']

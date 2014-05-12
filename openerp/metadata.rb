@@ -9,6 +9,7 @@ version          '0.1.0'
 depends "supervisor"
 depends "gunicorn"
 depends "nginx"
+depends "postgresql"
 
 
 %w{ ubuntu }.each do |os|

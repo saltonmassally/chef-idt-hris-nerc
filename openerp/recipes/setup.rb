@@ -12,6 +12,7 @@ include_recipe "gunicorn"
 include_recipe "nginx::repo"
 include_recipe "nginx"
 include_recipe "nginx::http_stub_status_module"
+include_recipe 'postgresql::client'
 
 node[:openerp][:apt_packages].each do |pkg|
   package pkg do
