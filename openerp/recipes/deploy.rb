@@ -39,10 +39,10 @@ node[:deploy].each do |application, deploy|
 #    EOH
 #  end
 
-#  execute "install openerp" do
-#    command "python setup.py install"
-#    cwd deploy[:absolute_document_root]
-#  end
+  execute "install openerp" do
+    command "python setup.py install"
+    cwd deploy[:absolute_document_root]
+  end
 
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
     source "openerp-wsgi.py.erb"
@@ -57,14 +57,6 @@ node[:deploy].each do |application, deploy|
     )    
   end
 
-  supervisor_service "gunicorn" do
-    command "gunicorn openerp:service.wsgi_server.application -c #{deploy[:absolute_document_root]}openerp-wsgi.py"
-    directory deploy[:absolute_document_root]
-    user 'nobody'
-    autostart true
-    autorestart true
-  end
-
   template "#{deploy[:absolute_document_root]}openerp/conf/openerp.conf" do
     source "openerp.conf.erb"
     owner deploy[:user]
@@ -76,6 +68,14 @@ node[:deploy].each do |application, deploy|
       :log_file =>  '#{deploy[:absolute_document_root]}/shared/log/openerp.log',
       :pid_file =>  '#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid'
     ) 
+  end
+
+  supervisor_service "gunicorn" do
+    command "gunicorn openerp:service.wsgi_server.application -c #{deploy[:absolute_document_root]}openerp-wsgi.py"
+    directory deploy[:absolute_document_root]
+    user 'nobody'
+    autostart true
+    autorestart true
   end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
