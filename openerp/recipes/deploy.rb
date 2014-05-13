@@ -33,16 +33,15 @@ node[:deploy].each do |application, deploy|
     end
   end
 
-  bash "run_setup" do
-    code <<-EOH
-    python #{deploy[:absolute_document_root]}setup.py install
-    EOH
-  end
-
-#  execute "install openerp" do
-#    command "python setup.py install"
-#    cwd deploy[:absolute_document_root]
+#  bash "run_setup" do
+#    code <<-EOH
+#    python #{deploy[:absolute_document_root]}setup.py install
+#    EOH
 #  end
+
+  execute "python setup.py install" do
+    cwd deploy[:absolute_document_root]
+  end
 
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
     source "openerp-wsgi.py.erb"
@@ -73,7 +72,7 @@ node[:deploy].each do |application, deploy|
   supervisor_service "gunicorn" do
     command "gunicorn openerp:service.wsgi_server.application -c #{deploy[:absolute_document_root]}openerp-wsgi.py"
     directory deploy[:absolute_document_root]
-    user 'nobody'
+    user deploy[:user]
     autostart true
     autorestart true
   end
