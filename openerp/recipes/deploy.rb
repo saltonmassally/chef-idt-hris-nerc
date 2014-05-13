@@ -39,7 +39,7 @@ node[:deploy].each do |application, deploy|
 #    EOH
 #  end
 
-  execute "python setup.py install" do
+  python "setup.py install" do
     cwd deploy[:absolute_document_root]
   end
 
