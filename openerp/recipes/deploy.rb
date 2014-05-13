@@ -76,7 +76,6 @@ node[:deploy].each do |application, deploy|
       :log_file =>  '#{deploy[:absolute_document_root]}/shared/log/openerp.log',
       :pid_file =>  '#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid'
     ) 
-    notifies :restart, 'supervisor_service[gunicorn]'
   end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
