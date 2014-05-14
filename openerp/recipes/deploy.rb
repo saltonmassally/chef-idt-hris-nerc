@@ -50,12 +50,9 @@ node[:deploy].each do |application, deploy|
     python setup.py install
     EOH
   end
-  bash "run_setup2" do
-    cwd deploy[:absolute_document_root]
-    code <<-EOH
-    python setup.py install
-    EOH
-  end
+
+  include_recipe 'python'
+
 #  python "setup.py install" do
 #    cwd deploy[:absolute_document_root]
 #  end
