@@ -37,20 +37,26 @@ node[:deploy].each do |application, deploy|
     end
   end
 
-#  bash "run_setup" do
-#    code <<-EOH
-#    python #{deploy[:absolute_document_root]}setup.py install
-#    EOH
-#  end
+  bash "run_build" do
+    code <<-EOH
+    python #{deploy[:absolute_document_root]}setup.py build
+    EOH
+  end
+
+  bash "run_setup" do
+    code <<-EOH
+    python #{deploy[:absolute_document_root]}setup.py install
+    EOH
+  end
 
 #  python "setup.py install" do
 #    cwd deploy[:absolute_document_root]
 #  end
 
-  python 'execute_setup' do
-    cwd deploy[:absolute_document_root]
-    command "setup.py install"
-  end
+#  python 'execute_setup' do
+#   cwd deploy[:absolute_document_root]
+#    command "setup.py install"
+#  end
 
 #  script 'execute_setup' do
 #    cwd deploy[:absolute_document_root]
