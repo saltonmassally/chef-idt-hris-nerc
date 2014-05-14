@@ -28,25 +28,25 @@ conf = openerp.tools.config
 # multiple locations)
 
 conf['addons_path'] = '<%=@deploy_path %><%=node[:openerp][:addon_path]%>'
-conf['admin_passwd'] = <%=node[:openerp][:admin_pass]%>
-conf['data_dir'] = <%=node[:openerp][:data_dir]%>
+conf['admin_passwd'] = '<%=node[:openerp][:admin_pass]%>'
+conf['data_dir'] = '<%=node[:openerp][:data_dir]%>'
 conf['db_maxconn'] = <%=node[:openerp][:database][:maxconn]%>
-conf['dbfilter'] = <%=node[:openerp][:db_filter]%> 
+conf['dbfilter'] = '<%=node[:openerp][:db_filter]%>'
 conf['debug_mode'] = <%=node[:openerp][:debug_mode]%>
 conf['disable_footer'] = False
 conf['disable_database_manager'] = True
-conf['email_from'] = <%=node[:openerp][:email_from]%>
+conf['email_from'] = '<%=node[:openerp][:email_from]%>'
 conf['import_partial'] = True
 conf['list_db'] = False
-conf['logfile'] = <%=@log_file %>
+conf['logfile'] = '<%=@log_file %>'
 conf['logrotate'] = True
-conf['sentry_dsn'] = <%=node[:openerp][:sentry_dsn]%>
-conf['aws_access_key'] = <%=node[:openerp][:aws_access_key]%>
-conf['aws_secret_key'] = <%=node[:openerp][:aws_secret_key]%>
-conf['aws_s3_bucket']  = <%=node[:openerp][:aws_s3_bucket]%>
-conf['static_http_document_root'] = <%=node[:openerp][:static_http_document_root]%>
-conf['static_http_enable'] = True
-conf['static_http_url_prefix'] = <%=node[:openerp][:static_http_url_prefix]%>
+conf['sentry_dsn'] = '<%=node[:openerp][:sentry_dsn]%>'
+conf['aws_access_key'] = '<%=node[:openerp][:aws_access_key]%>'
+conf['aws_secret_key'] = '<%=node[:openerp][:aws_secret_key]%>'
+conf['aws_s3_bucket']  = '<%=node[:openerp][:aws_s3_bucket]%>'
+#conf['static_http_document_root'] = <%=node[:openerp][:static_http_document_root]%>
+#conf['static_http_enable'] = True
+#conf['static_http_url_prefix'] = <%=node[:openerp][:static_http_url_prefix]%>
 
 
 # Optional database config if not using local socket

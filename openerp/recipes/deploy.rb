@@ -43,9 +43,21 @@ node[:deploy].each do |application, deploy|
 #    EOH
 #  end
 
-  python "setup.py install" do
+#  python "setup.py install" do
+#    cwd deploy[:absolute_document_root]
+#  end
+
+#  python 'run_setup' do
+#    cwd deploy[:absolute_document_root]
+#    code <<-EOH
+#      setup.py install
+#    EOH
+
+  script 'execute_file' do
     cwd deploy[:absolute_document_root]
+    code "python setup.py install"
   end
+
 
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
     source "openerp-wsgi.py.erb"
@@ -55,8 +67,8 @@ node[:deploy].each do |application, deploy|
     action :create
     variables(
       :deploy_path => deploy[:absolute_document_root],
-      :log_file =>  '#{deploy[:absolute_document_root]}/shared/log/openerp.log',
-      :pid_file =>  '#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid'
+      :log_file =>  "#{deploy[:absolute_document_root]}/shared/log/openerp.log",
+      :pid_file =>  "#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid"
     )    
   end
 
@@ -68,8 +80,8 @@ node[:deploy].each do |application, deploy|
     action :create
     variables(
       :deploy_path => deploy[:absolute_document_root],
-      :log_file =>  '#{deploy[:absolute_document_root]}/shared/log/openerp.log',
-      :pid_file =>  '#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid'
+      :log_file =>  "#{deploy[:absolute_document_root]}/shared/log/openerp.log",
+      :pid_file =>  "#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid"
     ) 
   end
 
@@ -95,7 +107,7 @@ node[:deploy].each do |application, deploy|
 
   cron "openerp_cron" do
     command "cd #{deploy[:absolute_document_root]}; python oe cron ----addons #{deploy[:absolute_document_root]}openerp/addons"
-    minute "*/15"
+    minute "*/5"
   end
 
   
