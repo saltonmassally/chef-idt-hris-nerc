@@ -49,9 +49,7 @@ node[:deploy].each do |application, deploy|
 
   python 'execute_setup' do
     cwd deploy[:absolute_document_root]
-    code <<-EOH.gsub(/^ {4}/, '')
-      setup.py install
-    EOH
+    command "setup.py install"
   end
 
 #  script 'execute_setup' do
