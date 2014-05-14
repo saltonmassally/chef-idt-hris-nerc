@@ -7,7 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
