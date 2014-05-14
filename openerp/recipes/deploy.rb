@@ -37,26 +37,6 @@ node[:deploy].each do |application, deploy|
     end
   end
 
-#  bash "run_build" do
-#   cwd deploy[:absolute_document_root]
-#    code <<-EOH
-#    python setup.py build
-#    EOH
-#  end
-
-#  bash "run_setup" do
-#    cwd deploy[:absolute_document_root]
-#    code <<-EOH
-#    python setup.py install
-#    EOH
-#  end
-
-#  include_recipe 'python'
-
-#  python "setup.py install" do
-#    cwd deploy[:absolute_document_root]
-#  end
-
   script 'execute_setup' do
     interpreter "bash"
     user "root"
@@ -64,11 +44,14 @@ node[:deploy].each do |application, deploy|
     code "python setup.py install"
   end
 
-#  script 'execute_setup' do
-#    cwd deploy[:absolute_document_root]
-#    code "sudo python setup.py install"
-#  end
-
+# lets bring back sanity
+  bash "fix_packages" do
+    cwd '/tmp'
+    code <<-EOH
+    wget http://python-distribute.org/distribute_setup.py
+    python distribute_setup.py
+    EOH
+  end
 
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
     source "openerp-wsgi.py.erb"
