@@ -58,10 +58,10 @@ node[:deploy].each do |application, deploy|
 #  end
 
   script 'execute_setup' do
-    interpreter "python"
+    interpreter "bash"
     user "root"
     cwd deploy[:absolute_document_root]
-    code "setup.py install"
+    code "python setup.py install"
   end
 
 #  script 'execute_setup' do
