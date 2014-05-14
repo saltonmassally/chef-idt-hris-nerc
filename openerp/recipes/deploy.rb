@@ -47,16 +47,15 @@ node[:deploy].each do |application, deploy|
 #    cwd deploy[:absolute_document_root]
 #  end
 
-#  python 'run_setup' do
-#    cwd deploy[:absolute_document_root]
-#    code <<-EOH
-#      setup.py install
-#    EOH
-
-  script 'execute_setup' do
+  python 'run_setup' do
     cwd deploy[:absolute_document_root]
-    code "sudo python setup.py install"
+    code "setup.py install"
   end
+
+#  script 'execute_setup' do
+#    cwd deploy[:absolute_document_root]
+#    code "sudo python setup.py install"
+#  end
 
 
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
