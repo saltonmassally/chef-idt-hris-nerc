@@ -26,6 +26,7 @@ default[:openerp][:pip_packages] = %w[
 default[:openerp][:database][:name] = ''
 default[:openerp][:database][:host] = 'False'
 default[:openerp][:database][:password] = ''
+default[:openerp][:database][:port] = 5432
 default[:openerp][:database][:user] = ''
 default[:openerp][:database][:maxconn] = 300
 default[:openerp][:servername] = 'hris.sl'
