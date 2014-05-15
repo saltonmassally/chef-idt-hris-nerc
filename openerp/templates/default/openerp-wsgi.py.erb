@@ -50,11 +50,11 @@ conf['aws_s3_bucket']  = '<%=node[:openerp][:aws_s3_bucket]%>'
 
 
 # Optional database config if not using local socket
-conf['db_name'] = '<%=node[:openerp][:database][:name]%>'
-conf['db_host'] = '<%=node[:openerp][:database][:host]%>'
-conf['db_user'] = '<%=node[:openerp][:database][:user]%>'
-conf['db_port'] = <%=node[:openerp][:database][:port]%>
-conf['db_password'] = '<%=node[:openerp][:database][:password]%>'
+conf['db_name'] = '<%=@database[:database] %>'
+conf['db_host'] = '<%=@database[:host] %>'
+conf['db_user'] = '<%=@database[:username] %>'
+conf['db_port'] = <%=@database[:port] %>
+conf['db_password'] = '<%=@database[:password] %>'
 
 #----------------------------------------------------------
 # Generic WSGI handlers application

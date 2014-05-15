@@ -23,11 +23,11 @@ default[:openerp][:pip_packages] = %w[
   https://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
 ]
   
-default[:openerp][:database][:name] = node[:opsworks][:stack][:db_name]
-default[:openerp][:database][:host] = node[:opsworks][:stack][:address]
-default[:openerp][:database][:password] = ''
-default[:openerp][:database][:port] = node[:opsworks][:stack][:port]
-default[:openerp][:database][:user] = node[:opsworks][:stack][:db_user]
+#default[:openerp][:database][:name] = node[:opsworks][:stack][:rds_instances][:db_name]
+#default[:openerp][:database][:host] = node[:opsworks][:stack][:address]
+#default[:openerp][:database][:password] = ''
+#default[:openerp][:database][:port] = node[:opsworks][:stack][:port]
+#default[:openerp][:database][:user] = node[:opsworks][:stack][:db_user]
 default[:openerp][:database][:maxconn] = 300
 default[:openerp][:servername] = 'hris.sl'
 
