@@ -45,6 +45,7 @@ node[:deploy].each do |application, deploy|
     command "chown {deploy[:user]}:{deploy[:group]} {node[:openerp][:data_dir]}; chmod 775 {node[:openerp][:data_dir]}"
     only_if { ::File.exists?(node[:openerp][:data_dir]) }
   end
+
   node[:openerp][:pip_packages].each do |pkg|
     python_pip pkg do
       action :install
