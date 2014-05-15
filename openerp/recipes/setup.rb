@@ -15,6 +15,15 @@ include_recipe "python"
 
 include_recipe 'postgresql::client'
 
+# lets set the python egg cache
+directory "/tmp/python-eggs" do
+  owner "root"
+  group "root"
+  mode 00777
+  action :create
+end
+
+ENV['PYTHON_EGG_CACHE'] = '/tmp/python-eggs'
 
 node[:openerp][:apt_packages].each do |pkg|
   package pkg do
