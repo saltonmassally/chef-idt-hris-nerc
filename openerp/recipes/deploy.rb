@@ -31,6 +31,15 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
+# lets ensure that pillow will
+  bash "correct_for_pillow" do
+    code <<-EOH
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+    sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+    EOH
+  end
+
   node[:openerp][:pip_packages].each do |pkg|
     python_pip pkg do
       action :install
@@ -61,8 +70,8 @@ node[:deploy].each do |application, deploy|
     action :create
     variables(
       :deploy_path => deploy[:absolute_document_root],
-      :log_file =>  "#{deploy[:deploy_to]}shared/log/openerp.log",
-      :pid_file =>  "#{deploy[:deploy_to]}shared/pid/gunicorn.pid",
+      :log_file =>  "#{deploy[:deploy_to]}/shared/log/openerp.log",
+      :pid_file =>  "#{deploy[:deploy_to]}/shared/pid/gunicorn.pid",
       :database => deploy[:database]
     )    
   end
@@ -75,8 +84,8 @@ node[:deploy].each do |application, deploy|
     action :create
     variables(
       :deploy_path => deploy[:absolute_document_root],
-      :log_file =>  "#{deploy[:deploy_to]}shared/log/openerp.log",
-      :pid_file =>  "#{deploy[:deploy_to]}shared/pid/gunicorn.pid",
+      :log_file =>  "#{deploy[:deploy_to]}/shared/log/openerp.log",
+      :pid_file =>  "#{deploy[:deploy_to]}/shared/pid/gunicorn.pid",
       :database => deploy[:database]
     ) 
   end

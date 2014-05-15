@@ -4,6 +4,8 @@ default[:openerp][:apt_packages] = %w[
   libldap2-dev
   libxml2-dev 
   libxslt1-dev
+  libjpeg-dev
+  libjpeg8-dev
   graphviz
   libevent-dev
   ghostscript

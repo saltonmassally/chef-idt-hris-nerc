@@ -4,13 +4,13 @@ admin_passwd = <%=node[:openerp][:admin_pass]%>
 auto_reload = False
 csv_internal_sep = ,
 data_dir = <%=node[:openerp][:data_dir]%>
-db_host = <%=node[:openerp][:database][:host]%>
+db_host = <%=@database[:host] %>
 db_maxconn = <%=node[:openerp][:database][:maxconn]%>
-db_name = <%=node[:openerp][:database][:name]%>
-db_password = <%=node[:openerp][:database][:password]%>
-db_port = <%=node[:openerp][:database][:port]%>
+db_name = <%=@database[:database] %>
+db_password = <%=@database[:password] %>
+db_port = <%=@database[:port] %>
 db_template = template1
-db_user = <%=node[:openerp][:database][:user]%>
+db_user = <%=@database[:username] %>
 dbfilter = <%=node[:openerp][:db_filter]%> 
 debug_mode = <%=node[:openerp][:debug_mode]%>
 demo = {}
