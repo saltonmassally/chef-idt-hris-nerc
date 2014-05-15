@@ -61,8 +61,8 @@ node[:deploy].each do |application, deploy|
     action :create
     variables(
       :deploy_path => deploy[:absolute_document_root],
-      :log_file =>  "#{deploy[:absolute_document_root]}/shared/log/openerp.log",
-      :pid_file =>  "#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid"
+      :log_file =>  "#{deploy[:deploy_to]}shared/log/openerp.log",
+      :pid_file =>  "#{deploy[:deploy_to]}shared/pid/gunicorn.pid"
     )    
   end
 
@@ -74,8 +74,8 @@ node[:deploy].each do |application, deploy|
     action :create
     variables(
       :deploy_path => deploy[:absolute_document_root],
-      :log_file =>  "#{deploy[:absolute_document_root]}/shared/log/openerp.log",
-      :pid_file =>  "#{deploy[:absolute_document_root]}/shared/pid/gunicorn.pid"
+      :log_file =>  "#{deploy[:deploy_to]}shared/log/openerp.log",
+      :pid_file =>  "#{deploy[:deploy_to]}shared/pid/gunicorn.pid"
     ) 
   end
 
@@ -100,7 +100,7 @@ node[:deploy].each do |application, deploy|
   end
 
   cron "openerp_cron" do
-    command "cd #{deploy[:absolute_document_root]}; python oe cron ----addons #{deploy[:absolute_document_root]}openerp/addons"
+    command "cd #{deploy[:absolute_document_root]}; python oe cron --addons #{deploy[:absolute_document_root]}openerp/addons"
     minute "*/5"
   end
 
