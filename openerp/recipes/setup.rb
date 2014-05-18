@@ -12,6 +12,8 @@ include_recipe "nginx::repo"
 include_recipe "nginx"
 include_recipe "nginx::http_stub_status_module"
 include_recipe "python"
+include_recipe "openoffice::headless"
+include_recipe "openoffice::apps"
 
 include_recipe 'postgresql::client'
 
@@ -31,14 +33,24 @@ node[:openerp][:apt_packages].each do |pkg|
   end
 end
 
-cookbook_file "/etc/init.d/openoffice.sh" do
-  source "openoffice.sh"
-  action :create_if_missing
-  mode 0755
+# lets setup unoconv
+git "#{Chef::Config[:file_cache_path]}/unoconv" do
+  repository "https://github.com/dagwieers/unoconv.git"
+  reference "master"
+  action :sync
 end
 
-supervisor_service "openoffice" do
-  command "soffice '--accept=socket,host=127.0.0.1,port=8100,tcpNoDelay=1;urp;' --headless --nodefault --nofirststartwizard --nolockcheck --nologo --norestore"
+bash "install_unoconv_build" do
+  cwd "#{Chef::Config[:file_cache_path]}/unoconv"
+  code <<-EOH
+    make install
+  EOH
+end
+
+#ENV['UNO_PATH'] = '../program'
+
+supervisor_service "start_unoconv" do
+  command "unoconv --listener"
   user 'nobody'
   autostart true
   autorestart true

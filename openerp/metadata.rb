@@ -10,6 +10,8 @@ depends "supervisor"
 depends "gunicorn"
 depends "nginx"
 depends "postgresql"
+depends "java"
+depends "openoffice"
 
 
 %w{ ubuntu }.each do |os|

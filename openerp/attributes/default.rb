@@ -10,9 +10,6 @@ default[:openerp][:apt_packages] = %w[
   libevent-dev
   ghostscript
   poppler-utils
-  openoffice.org-base
-  openoffice.org-writer
-  openoffice.org-calc
 ]
 
 default[:openerp][:pip_packages] = %w[
@@ -20,6 +17,7 @@ default[:openerp][:pip_packages] = %w[
   raven-sanitize-openerp
   gevent
   wkhtmltopdf
+  subprocess32
   boto
   git+https://github.com/tarzan0820/zkemapi.git@master
   https://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
