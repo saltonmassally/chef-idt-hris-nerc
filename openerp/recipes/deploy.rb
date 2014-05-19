@@ -96,6 +96,10 @@ node[:deploy].each do |application, deploy|
     ) 
   end
 
+  magic_shell_environment 'PYTHON_EGG_CACHE' do
+    value '/tmp/python-eggs'
+  end
+
   supervisor_service "gunicorn" do
     command "gunicorn openerp:service.wsgi_server.application -c #{deploy[:absolute_document_root]}openerp-wsgi.py"
     directory deploy[:absolute_document_root]
