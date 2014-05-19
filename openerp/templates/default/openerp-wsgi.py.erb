@@ -36,17 +36,17 @@ conf['debug_mode'] = <%=node[:openerp][:debug_mode]%>
 conf['disable_footer'] = False
 conf['disable_database_manager'] = True
 conf['email_from'] = '<%=node[:openerp][:email_from]%>'
-conf['import_partial'] = True
-conf['list_db'] = False
+# conf['import_partial'] = True (this triggers error)
+conf['list_db'] = <%=node[:openerp][:debug_mode]%>
 conf['logfile'] = '<%=@log_file %>'
 conf['logrotate'] = True
 conf['sentry_dsn'] = '<%=node[:openerp][:sentry_dsn]%>'
 conf['aws_access_key'] = '<%=node[:openerp][:aws_access_key]%>'
 conf['aws_secret_key'] = '<%=node[:openerp][:aws_secret_key]%>'
 conf['aws_s3_bucket']  = '<%=node[:openerp][:aws_s3_bucket]%>'
-#conf['static_http_document_root'] = <%=node[:openerp][:static_http_document_root]%>
+#conf['static_http_document_root'] = '<%=node[:openerp][:static_http_document_root]%>'
 #conf['static_http_enable'] = True
-#conf['static_http_url_prefix'] = <%=node[:openerp][:static_http_url_prefix]%>
+#conf['static_http_url_prefix'] = '<%=node[:openerp][:static_http_url_prefix]%>'
 
 
 # Optional database config if not using local socket

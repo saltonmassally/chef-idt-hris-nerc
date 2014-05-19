@@ -32,7 +32,7 @@ default[:openerp][:database][:maxconn] = 300
 default[:openerp][:servername] = 'hris.sl'
 
 
-default[:openerp][:data_dir] = '/mount/data'
+default[:openerp][:data_dir] = '/mnt/data'
 default[:openerp][:db_filter] = '.*'
 default[:openerp][:debug_mode] = 'False'
 default[:openerp][:email_from] = 'no-reply@hris.sl'

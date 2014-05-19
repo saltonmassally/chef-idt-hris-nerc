@@ -12,6 +12,7 @@ depends "nginx"
 depends "postgresql"
 depends "java"
 depends "openoffice"
+depends "idt_infra_tools"
 
 
 %w{ ubuntu }.each do |os|

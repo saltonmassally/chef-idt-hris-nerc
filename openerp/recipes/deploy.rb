@@ -91,7 +91,7 @@ node[:deploy].each do |application, deploy|
     variables(
       :deploy_path => deploy[:absolute_document_root],
       :log_file =>  "#{deploy[:deploy_to]}/shared/log/openerp.log",
-      :pid_file =>  "#{deploy[:deploy_to]}/shared/pid/openerp.pid",
+      :pid_file =>  "#{deploy[:deploy_to]}/shared/pids/openerp.pid",
       :database => deploy[:database]
     ) 
   end

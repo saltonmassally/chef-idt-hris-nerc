@@ -25,7 +25,13 @@ directory "/tmp/python-eggs" do
   action :create
 end
 
-ENV['PYTHON_EGG_CACHE'] = '/tmp/python-eggs'
+magic_shell_environment 'PYTHON_EGG_CACHE' do
+  value '/tmp/python-eggs'
+end
+
+magic_shell_environment 'PYTHON_EGG_CACHE' do
+  value '/tmp/python-eggs'
+end
 
 node[:openerp][:apt_packages].each do |pkg|
   package pkg do
@@ -47,14 +53,21 @@ bash "install_unoconv_build" do
   EOH
 end
 
-#ENV['UNO_PATH'] = '../program'
-
-supervisor_service "start_unoconv" do
-  command "unoconv --listener"
-  user 'nobody'
-  autostart true
-  autorestart true
+magic_shell_environment 'PYTHONPATH' do
+  value '$PYTHONPATH:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages'
 end
+
+magic_shell_environment 'UNO_PATH' do
+  value '/usr/lib/libreoffice/program/'
+end
+
+
+# supervisor_service "unoconv" do
+#   command "unoconv --listener"
+#   user 'nobody'
+#   autostart true
+#   autorestart true
+# end
 
 
 # lets copy the file the openoffice files over t init.d and add to run levels
