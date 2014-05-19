@@ -29,9 +29,6 @@ magic_shell_environment 'PYTHON_EGG_CACHE' do
   value '/tmp/python-eggs'
 end
 
-magic_shell_environment 'PYTHON_EGG_CACHE' do
-  value '/tmp/python-eggs'
-end
 
 node[:openerp][:apt_packages].each do |pkg|
   package pkg do
@@ -61,7 +58,7 @@ magic_shell_environment 'UNO_PATH' do
   value '/usr/lib/libreoffice/program/'
 end
 
-
+#
 # supervisor_service "unoconv" do
 #   command "unoconv --listener"
 #   user 'nobody'
