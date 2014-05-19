@@ -40,6 +40,15 @@ node[:deploy].each do |application, deploy|
     EOH
   end
 
+  # create data dir if for some reason its not there
+  directory "/tmp/something" do
+    owner deploy[:user]
+    group deploy[:group]
+    mode 00755
+    action :create
+    not_if { ::File.exists?(node[:openerp][:data_dir]) }
+  end
+
 # lets ensure that the data dir is writable
   bash "correct_directory_permission" do
     command "chown {deploy[:user]}:{deploy[:group]} {node[:openerp][:data_dir]}; chmod 775 {node[:openerp][:data_dir]}"
