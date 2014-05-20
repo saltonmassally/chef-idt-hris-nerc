@@ -15,7 +15,6 @@ default[:openerp][:apt_packages] = %w[
 default[:openerp][:pip_packages] = %w[
   raven
   raven-sanitize-openerp
-  gevent
   wkhtmltopdf
   subprocess32
   boto
@@ -47,7 +46,7 @@ default[:openerp][:static_http_document_root] = '/var/www/'
 default[:openerp][:static_http_url_prefix]= '/static'
 
 
-default[:openerp][:update_command] = 
+default[:openerp][:update_command] = ''
 
 override['supervisor']['inet_port'] = '9001'
 

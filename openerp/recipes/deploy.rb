@@ -41,7 +41,7 @@ node[:deploy].each do |application, deploy|
   end
 
   # create data dir if for some reason its not there
-  directory "/tmp/something" do
+  directory node[:openerp][:data_dir] do
     owner deploy[:user]
     group deploy[:group]
     mode 00755
@@ -106,7 +106,7 @@ node[:deploy].each do |application, deploy|
   end
 
   supervisor_service "gunicorn" do
-    command "gunicorn openerp:service.wsgi_server.application -c #{deploy[:absolute_document_root]}openerp-wsgi.py"
+    command "gunicorn openerp:service.wsgi_server.application -c openerp-wsgi.py"
     directory deploy[:absolute_document_root]
     user deploy[:user]
     autostart true
