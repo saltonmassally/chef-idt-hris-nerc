@@ -105,16 +105,13 @@ node[:deploy].each do |application, deploy|
     ) 
   end
 
-  magic_shell_environment 'PYTHON_EGG_CACHE' do
-    value '/tmp/python-eggs'
-  end
-
   supervisor_service "gunicorn" do
     command "gunicorn openerp:service.wsgi_server.application -c #{deploy[:absolute_document_root]}openerp-wsgi.py"
     directory deploy[:absolute_document_root]
     user deploy[:user]
     autostart true
     autorestart true
+    environment "PYTHON_EGG_CACHE=/tmp/python-eggs,UNO_PATH=/usr/lib/libreoffice/program/,PYTHONPATH=/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
   end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do

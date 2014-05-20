@@ -29,6 +29,15 @@ magic_shell_environment 'PYTHON_EGG_CACHE' do
   value '/tmp/python-eggs'
 end
 
+magic_shell_environment 'PYTHONPATH' do
+  value '/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages'
+end
+
+magic_shell_environment 'UNO_PATH' do
+  value '/usr/lib/libreoffice/program/'
+end
+
+
 
 node[:openerp][:apt_packages].each do |pkg|
   package pkg do
@@ -48,14 +57,6 @@ bash "install_unoconv_build" do
   code <<-EOH
     make install
   EOH
-end
-
-magic_shell_environment 'PYTHONPATH' do
-  value '$PYTHONPATH:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages'
-end
-
-magic_shell_environment 'UNO_PATH' do
-  value '/usr/lib/libreoffice/program/'
 end
 
 #
