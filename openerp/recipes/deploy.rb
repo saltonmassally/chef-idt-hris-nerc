@@ -111,10 +111,13 @@ node[:deploy].each do |application, deploy|
     user deploy[:user]
     autostart true
     autorestart true
-    environment "PYTHON_EGG_CACHE=/tmp/python-eggs,UNO_PATH=/usr/lib/libreoffice/program/,PYTHONPATH=/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
+    environment {:PYTHON_EGG_CACHE => "/tmp/python-eggs",
+                 :UNO_PATH => "/usr/lib/libreoffice/program/",
+		 :PYTHONPATH => "/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
+		}
   end
 
-  template "/etc/nginx/sites-enabled/ngnix-openerp" do
+  template "/etc/nginx/sites-enabled/sngnix-openerp" do
     source "ngnix-openerp.conf.erb"
     variables({
       :deploy_path => deploy[:absolute_document_root],
