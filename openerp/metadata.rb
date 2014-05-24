@@ -15,6 +15,7 @@ depends "openoffice"
 depends "idt_infra_tools"
 
 
+
 %w{ ubuntu }.each do |os|
   supports os
 end
