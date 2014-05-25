@@ -96,13 +96,27 @@ node[:deploy].each do |application, deploy|
     ) 
   end
 
+  template "/home/#{deploy[:user]}/.openerp_serverrc" do
+    source "openerp.conf.erb"
+    owner deploy[:user]
+    group deploy[:group]
+    mode "0644"
+    action :create
+    variables(
+      :deploy_path => deploy[:absolute_document_root],
+      :log_file =>  "#{deploy[:deploy_to]}/shared/log/openerp.log",
+      :pid_file =>  "#{deploy[:deploy_to]}/shared/pids/openerp.pid",
+      :database => deploy[:database]
+    ) 
+  end
+
   supervisor_service "gunicorn" do
     command "gunicorn openerp:service.wsgi_server.application -c openerp-wsgi.py"
     directory deploy[:absolute_document_root]
     user deploy[:user]
     autostart true
     autorestart true
-    environment :PYTHON_EGG_CACHE => "/tmp/python-eggs",:UNO_PATH => "/usr/lib/libreoffice/program/",:PYTHONPATH => "/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
+    environment :HOME => "/home/#{deploy[:user]}",:PYTHON_EGG_CACHE => "/tmp/python-eggs",:UNO_PATH => "/usr/lib/libreoffice/program/",:PYTHONPATH => "/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
 		
   end
 

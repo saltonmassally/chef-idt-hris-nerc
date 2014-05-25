@@ -45,7 +45,7 @@ node[:openerp][:apt_packages].each do |pkg|
   end
 end
 
-# lets ensure that pillow will
+# lets ensure that pillow has jpeg support
   bash "correct_for_pillow" do
     code <<-EOH
     ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
