@@ -32,7 +32,7 @@ default[:openerp][:servername] = 'hris.sl'
 
 
 default[:openerp][:data_dir] = '/mnt/data'
-default[:openerp][:db_filter] = '.*'
+default[:openerp][:db_filter] = '^%d$'
 default[:openerp][:debug_mode] = 'False'
 default[:openerp][:email_from] = 'no-reply@hris.sl'
 
