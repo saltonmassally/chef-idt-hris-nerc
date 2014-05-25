@@ -45,6 +45,15 @@ node[:openerp][:apt_packages].each do |pkg|
   end
 end
 
+# lets ensure that pillow will
+  bash "correct_for_pillow" do
+    code <<-EOH
+    ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+    ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+    ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+    EOH
+  end
+
 # lets setup unoconv
 git "#{Chef::Config[:file_cache_path]}/unoconv" do
   repository "https://github.com/dagwieers/unoconv.git"

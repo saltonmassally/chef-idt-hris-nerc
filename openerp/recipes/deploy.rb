@@ -31,15 +31,6 @@ node[:deploy].each do |application, deploy|
     app application
   end
 
-# lets ensure that pillow will
-  bash "correct_for_pillow" do
-    code <<-EOH
-    ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
-    ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
-    ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
-    EOH
-  end
-
   # create data dir if for some reason its not there
   directory node[:openerp][:data_dir] do
     owner deploy[:user]
