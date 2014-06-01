@@ -117,7 +117,10 @@ node[:deploy].each do |application, deploy|
     autostart true
     autorestart true
     environment :HOME => "/home/#{deploy[:user]}",:PYTHON_EGG_CACHE => "/tmp/python-eggs",:UNO_PATH => "/usr/lib/libreoffice/program/",:PYTHONPATH => "/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
-		
+  end
+
+  supervisor_service "gunicorn" do
+     action :restart
   end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
