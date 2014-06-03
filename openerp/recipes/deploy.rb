@@ -120,7 +120,17 @@ node[:deploy].each do |application, deploy|
   end
 
   supervisor_service "gunicorn" do
-     action :restart
+    action :stop
+  end
+
+
+
+  script 'execute_db_update' do
+    interpreter "bash"
+    user "root"
+    cwd document_root
+    code "python db_update.py --user=#{node[:openerp][:database][:user]}  --password=#{node[:openerp][:database][:password]} --port=#{node[:openerp][:database][:port]} --sentry=#{node[:openerp][:sentry_dsn]} --backup_dir=#{node[:openerp][:deploy_to]}/shared/backups/"
+    notifies :restart, "supervisor_service[gunicorn]"
   end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
