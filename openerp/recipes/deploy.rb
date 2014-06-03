@@ -129,6 +129,7 @@ node[:deploy].each do |application, deploy|
     interpreter "bash"
     user deploy[:user]
     cwd deploy[:absolute_document_root]
+    environment :HOME => "/home/#{deploy[:user]}",:PYTHON_EGG_CACHE => "/tmp/python-eggs",:UNO_PATH => "/usr/lib/libreoffice/program/",:PYTHONPATH => "/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
     code "python db_update.py --user=#{deploy[:database][:username]}  --password=#{deploy[:database][:password]} --host=#{deploy[:database][:host]} --port=#{deploy[:database][:port]} --sentry=#{node[:openerp][:sentry_dsn]} --backup_dir=#{node[:openerp][:data_dir]}/backups/"
     notifies :restart, "supervisor_service[gunicorn]"
   end
