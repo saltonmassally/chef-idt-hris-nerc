@@ -130,7 +130,7 @@ node[:deploy].each do |application, deploy|
     user deploy[:user]
     cwd deploy[:absolute_document_root]
     environment 'HOME' => "/home/#{deploy[:user]}"
-    code "python db_update.py --user=#{deploy[:database][:username]}  --password=#{deploy[:database][:password]} --host=#{deploy[:database][:host]} --port=#{deploy[:database][:port]} --sentry=#{node[:openerp][:sentry_dsn]} --backup_dir=#{node[:openerp][:data_dir]}/backups/"
+    code "python db_update.py --backup_dir=#{node[:openerp][:data_dir]}/backups/"
     notifies :restart, "supervisor_service[gunicorn]"
   end
 
