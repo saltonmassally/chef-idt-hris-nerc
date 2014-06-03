@@ -127,9 +127,9 @@ node[:deploy].each do |application, deploy|
 
   script 'execute_db_update' do
     interpreter "bash"
-    user "root"
-    cwd document_root
-    code "python db_update.py --user=#{node[:openerp][:database][:user]}  --password=#{node[:openerp][:database][:password]} --port=#{node[:openerp][:database][:port]} --sentry=#{node[:openerp][:sentry_dsn]} --backup_dir=#{node[:openerp][:deploy_to]}/shared/backups/"
+    user deploy[:user]
+    cwd deploy[:absolute_document_root]
+    code "python db_update.py --user=#{deploy[:database][:username]}  --password=#{deploy[:database][:password]} --host=#{deploy[:database][:host]} --port=#{deploy[:database][:port]} --sentry=#{node[:openerp][:sentry_dsn]} --backup_dir=#{node[:openerp][:data_dir]}/backups/"
     notifies :restart, "supervisor_service[gunicorn]"
   end
 
