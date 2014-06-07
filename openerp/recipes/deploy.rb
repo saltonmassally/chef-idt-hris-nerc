@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe "supervisor"
-include_recipe "gunicorn"
+include_recipe "openerp"
 include_recipe "nginx::repo"
 include_recipe "nginx"
 include_recipe "nginx::http_stub_status_module"
@@ -57,6 +57,13 @@ node[:deploy].each do |application, deploy|
     user "root"
     cwd deploy[:absolute_document_root]
     code "python setup.py install"
+  end
+
+  script 'chmod_gevent' do
+    interpreter "bash"
+    user "root"
+    cwd deploy[:absolute_document_root]
+    code "chmod +x openerp-gevent"
   end
 
 # lets bring back sanity
@@ -110,8 +117,8 @@ node[:deploy].each do |application, deploy|
     ) 
   end
 
-  supervisor_service "gunicorn" do
-    command "gunicorn openerp:service.wsgi_server.application -c openerp-wsgi.py"
+  supervisor_service "openerp" do
+    command "./openerp-server"
     directory deploy[:absolute_document_root]
     user deploy[:user]
     autostart true
@@ -119,7 +126,7 @@ node[:deploy].each do |application, deploy|
     environment :HOME => "/home/#{deploy[:user]}",:PYTHON_EGG_CACHE => "/tmp/python-eggs",:UNO_PATH => "/usr/lib/libreoffice/program/",:PYTHONPATH => "/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
   end
 
-  supervisor_service "gunicorn" do
+  supervisor_service "openerp" do
     action :stop
   end
 
@@ -131,7 +138,7 @@ node[:deploy].each do |application, deploy|
     cwd deploy[:absolute_document_root]
     environment 'HOME' => "/home/#{deploy[:user]}"
     code "python db_update.py --backup_dir=#{node[:openerp][:data_dir]}/backups/"
-    notifies :restart, "supervisor_service[gunicorn]"
+    notifies :restart, "supervisor_service[openerp]"
   end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
