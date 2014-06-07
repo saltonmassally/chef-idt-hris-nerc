@@ -118,7 +118,7 @@ node[:deploy].each do |application, deploy|
   end
 
   supervisor_service "openerp" do
-    command "./openerp-server"
+    command "python ./openerp-server"
     directory deploy[:absolute_document_root]
     user deploy[:user]
     autostart true
@@ -129,7 +129,6 @@ node[:deploy].each do |application, deploy|
   supervisor_service "openerp" do
     action :stop
   end
-
 
 
   script 'execute_db_update' do
@@ -152,13 +151,7 @@ node[:deploy].each do |application, deploy|
   nginx_site "ngnix-openerp" do
     enable true
   end
-
-  cron "openerp_cron" do
-    command "cd #{deploy[:absolute_document_root]}; python oe cron --addons #{deploy[:absolute_document_root]}openerp/addons"
-    minute "*/5"
-  end
-
-  
+ 
 
 end
 
