@@ -15,6 +15,7 @@ default[:openerp][:apt_packages] = %w[
 default[:openerp][:pip_packages] = %w[
   raven
   raven-sanitize-openerp
+  phonenumbers
   wkhtmltopdf
   subprocess32
   boto
