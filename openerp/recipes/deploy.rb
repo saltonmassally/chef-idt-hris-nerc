@@ -67,13 +67,13 @@ node[:deploy].each do |application, deploy|
   end
 
 # lets bring back sanity
-  bash "fix_packages" do
-    cwd '/tmp'
-    code <<-EOH
-    wget http://python-distribute.org/distribute_setup.py
-    python distribute_setup.py
-    EOH
-  end
+#  bash "fix_packages" do
+#    cwd '/tmp'
+#    code <<-EOH
+#    wget http://python-distribute.org/distribute_setup.py
+#    python distribute_setup.py
+#    EOH
+#  end
 
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
     source "openerp-wsgi.py.erb"
