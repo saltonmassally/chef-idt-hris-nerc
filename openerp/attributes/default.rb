@@ -12,14 +12,14 @@ default[:openerp][:apt_packages] = %w[
   poppler-utils
 ]
 
+  # git+https://github.com/tarzan0820/zkemapi.git@master
 default[:openerp][:pip_packages] = %w[
   raven
   raven-sanitize-openerp
   phonenumbers
   wkhtmltopdf
   subprocess32
-  boto
-  git+https://github.com/tarzan0820/zkemapi.git@master
+  boto  
   https://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
 ]
   
