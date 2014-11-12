@@ -51,6 +51,7 @@ end
     ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
     ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
     EOH
+    not_if { ::File.exists?('/usr/lib/libjpeg.so') }
   end
 
 # lets setup unoconv
