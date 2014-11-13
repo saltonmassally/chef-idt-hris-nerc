@@ -131,14 +131,14 @@ node[:deploy].each do |application, deploy|
   end
 
 
-  script 'execute_db_update' do
-    interpreter "bash"
-    user deploy[:user]
-    cwd deploy[:absolute_document_root]
-    environment 'HOME' => "/home/#{deploy[:user]}"
-    code "python db_update.py --backup_dir=#{node[:openerp][:data_dir]}/backups/"
-    notifies :restart, "supervisor_service[openerp]"
-  end
+#  script 'execute_db_update' do
+#    interpreter "bash"
+#    user deploy[:user]
+#    cwd deploy[:absolute_document_root]
+#    environment 'HOME' => "/home/#{deploy[:user]}"
+#    code "python db_update.py --backup_dir=#{node[:openerp][:data_dir]}/backups/"
+#    notifies :restart, "supervisor_service[openerp]"
+#  end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
     source "ngnix-openerp.conf.erb"
