@@ -44,13 +44,7 @@ node[:openerp][:apt_packages].each do |pkg|
   end
 end
 
-  bash "correct_for_pillow" do
-    code <<-EOH
-    easy_install -U setuptools
-    EOH
-  end
-
-
+  
 # lets ensure that pillow has jpeg support
   bash "correct_for_pillow" do
     code <<-EOH

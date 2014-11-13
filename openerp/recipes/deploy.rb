@@ -39,6 +39,12 @@ node[:deploy].each do |application, deploy|
     action :create
     not_if { ::File.exists?(node[:openerp][:data_dir]) }
   end
+  
+  bash "fix_setuptools" do
+      code <<-EOH
+      easy_install -U setuptools
+      EOH
+    end
 
 # lets ensure that the data dir is writable
   bash "correct_directory_permission" do
