@@ -8,7 +8,6 @@ version          '0.1.0'
 
 depends "ohai"
 depends "supervisor"
-depends "gunicorn"
 depends "nginx"
 depends "postgresql"
 depends "java"

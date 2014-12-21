@@ -20,6 +20,10 @@ default[:openerp][:pip_packages] = %w[
   wkhtmltopdf
   subprocess32
   boto  
+  unidecode
+  numpy
+  dedupe
+  datadiff
   https://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
 ]
   
@@ -29,13 +33,13 @@ default[:openerp][:pip_packages] = %w[
 #default[:openerp][:database][:port] = node[:opsworks][:stack][:port]
 #default[:openerp][:database][:user] = node[:opsworks][:stack][:db_user]
 default[:openerp][:database][:maxconn] = 300
-default[:openerp][:servername] = 'hris.sl'
+default[:openerp][:servername] = 'nercpay.sl'
 
 
 default[:openerp][:data_dir] = '/mnt/data'
-default[:openerp][:db_filter] = '^%d$'
+default[:openerp][:db_filter] = '*'
 default[:openerp][:debug_mode] = 'False'
-default[:openerp][:email_from] = 'no-reply@hris.sl'
+default[:openerp][:email_from] = 'no-reply@nercpay.sl'
 
 default[:openerp][:admin_pass] = 'supersecret'
 default[:openerp][:addon_path] = 'openerp/addons/'
@@ -60,7 +64,7 @@ override['nginx']['gzip'] = 'on'
 
 override['postgresql']['enable_pgdg_apt'] = true 
 override['postgresql']['version'] = '9.3'
-override[:chef_ec2_ebs_snapshot][:description] = "data.hris.sl data directory Backup $(date +'%Y-%m-%d %H:%M:%S')"
+override[:chef_ec2_ebs_snapshot][:description] = "data.nerc.sl data directory Backup $(date +'%Y-%m-%d %H:%M:%S')"
 
 #set the ff in stack settings
 # node['supervisor']['inet_username']
