@@ -147,11 +147,19 @@ node[:deploy].each do |application, deploy|
 #  end
   
   # create data dir if for some reason its not there
-    directory "/etc/nginx/ssh" do
-      mode 00755
-      action :create
-      not_if { ::File.exists?("/etc/nginx/ssh") }
+  template "/etc/nginx/sites-enabled/ngnix-openerp" do
+      source "ngnix-openerp.conf.erb"
+      variables({
+        :deploy_path => deploy[:absolute_document_root],
+      })
+      notifies :reload, 'service[nginx]'
     end
+    
+  directory "/etc/nginx/ssh" do
+    mode 00755
+    action :create
+    not_if { ::File.exists?("/etc/nginx/ssh") }
+  end
   
   template "/etc/nginx/ssh/server.crt" do
       source "server.crt.erb"
@@ -166,14 +174,6 @@ node[:deploy].each do |application, deploy|
         :ssl_pem => deploy[:ssl_certificate_key],
       })
     end
-
-  template "/etc/nginx/sites-enabled/ngnix-openerp" do
-    source "ngnix-openerp.conf.erb"
-    variables({
-      :deploy_path => deploy[:absolute_document_root],
-    })
-    notifies :reload, 'service[nginx]'
-  end
 
   nginx_site "ngnix-openerp" do
     enable true
