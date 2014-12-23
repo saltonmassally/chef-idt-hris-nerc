@@ -146,6 +146,13 @@ node[:deploy].each do |application, deploy|
 #    notifies :restart, "supervisor_service[openerp]"
 #  end
   
+  # create data dir if for some reason its not there
+    directory "/etc/nginx/ssh" do
+      mode 00755
+      action :create
+      not_if { ::File.exists?("/etc/nginx/ssh") }
+    end
+  
   template "/etc/nginx/ssh/server.crt" do
       source "server.crt.erb"
       variables({
