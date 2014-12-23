@@ -53,7 +53,9 @@ default[:openerp][:elastic_ip] = ''
 default[:openerp][:static_http_document_root] = '/var/www/'
 default[:openerp][:static_http_url_prefix]= '/static'
 
-
+default[:openerp][:ssl_public] = ''
+default[:openerp][:ssl_private] = ''
+  
 default[:openerp][:update_command] = ''
 
 override['supervisor']['inet_port'] = '9001'

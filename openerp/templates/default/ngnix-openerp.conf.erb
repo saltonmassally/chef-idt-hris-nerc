@@ -1,37 +1,49 @@
-upstream app_server {
-	server unix:/tmp/gunicorn.sock fail_timeout=0;
-	# For a TCP configuration:
-	# server 192.168.0.7:8000 fail_timeout=0;
-}
+http {
 
-server {
-	listen 80 default;
-	client_max_body_size 10G;
-	server_name <%=node[:openerp][:servername]%>;
-
-	keepalive_timeout 5;
-
-	# path for static files
-	root <%=node[:openerp][:static_http_document_root]%>;
-
-	location / {
-	    # checks for static file, if not found proxy to app
-	    try_files $uri @proxy_to_app;
+    upstream app_server {
+        server unix:/tmp/gunicorn.sock fail_timeout=0;
+        # For a TCP configuration:
+        # server 192.168.0.7:8000 fail_timeout=0;
+    }
+    
+    server {
+	    listen 80;
+	    return 301 https://$host$request_uri;
 	}
+    
 
-	location @proxy_to_app {
-	    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-	    proxy_set_header Host $http_host;
+    server {
+        listen 443 ssl;
+        client_max_body_size 10G;
+        server_name <%=node[:openerp][:servername]%>;
+		
+		listen 443 ssl;
+		ssl_certificate <%=node[:openerp][:ssl_public]%>;
+		ssl_certificate_key <%=node[:openerp][:ssl_private]%>;
+		
+        keepalive_timeout 5;
+        
+        # path for static files
+        root <%=node[:openerp][:static_http_document_root]%>;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
 	    proxy_set_header X-Real-IP $remote_addr;
-	    proxy_set_header X-Scheme $scheme;
-	    proxy_redirect off;
-	    proxy_pass   http://localhost:8069;
-	}
+            proxy_set_header X-Scheme $scheme;
+            proxy_redirect off;
+            proxy_pass   http://localhost:8069;
+        }
 
 	error_page 500 502 503 504 /500.html;
-	location = /500.html {
-	    root <%=node[:openerp][:static_http_document_root]%>;
-	}
+        location = /500.html {
+            root <%=node[:openerp][:static_http_document_root]%>;
+        }
 
+    }
 }
-
