@@ -53,8 +53,8 @@ default[:openerp][:elastic_ip] = ''
 default[:openerp][:static_http_document_root] = '/var/www/'
 default[:openerp][:static_http_url_prefix]= '/static'
 
-default[:openerp][:ssl_public] = ''
-default[:openerp][:ssl_private] = ''
+default[:openerp][:ssl_public] = '/etc/nginx/ssh/server.crt'
+default[:openerp][:ssl_private] = '/etc/nginx/ssh/server.pem'
   
 default[:openerp][:update_command] = ''
 

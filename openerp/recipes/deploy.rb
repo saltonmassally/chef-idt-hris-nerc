@@ -145,6 +145,20 @@ node[:deploy].each do |application, deploy|
 #    code "python db_update.py --backup_dir=#{node[:openerp][:data_dir]}/backups/"
 #    notifies :restart, "supervisor_service[openerp]"
 #  end
+  
+  template "/etc/nginx/ssh/server.crt" do
+      source "server.crt.erb"
+      variables({
+        :ssl_crt => deploy[:ssl_certificate],
+      })
+    end
+    
+  template "/etc/nginx/ssh/server.pem" do
+      source "server.pem.erb"
+      variables({
+        :ssl_pem => deploy[:ssl_certificate_key],
+      })
+    end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
     source "ngnix-openerp.conf.erb"
