@@ -37,7 +37,7 @@ default[:openerp][:servername] = 'nercpay.sl'
 
 
 default[:openerp][:data_dir] = '/mnt/data'
-default[:openerp][:db_filter] = '^%d$'
+default[:openerp][:db_filter] = '^nerc$'
 default[:openerp][:debug_mode] = 'False'
 default[:openerp][:email_from] = 'no-reply@nercpay.sl'
 
