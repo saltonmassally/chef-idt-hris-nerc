@@ -11,9 +11,7 @@ include_recipe "nginx::repo"
 include_recipe "nginx"
 include_recipe "nginx::http_stub_status_module"
 include_recipe "python"
-include_recipe "openoffice::headless"
-include_recipe "openoffice::apps"
-
+include_recipe 'java'
 include_recipe 'postgresql::client'
 
 # lets set the python egg cache
