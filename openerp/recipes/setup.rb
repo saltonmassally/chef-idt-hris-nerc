@@ -78,4 +78,18 @@ end
 # end
 
 
-# lets copy the file the openoffice files over t init.d and add to run levels
+# lets install openoffice
+
+directory "#{Chef::Config[:file_cache_path]}/openoffice" do
+  recursive true
+end
+
+tar_extract node['openerp']['openoffice_deb_url'] do
+  target_dir "#{Chef::Config[:file_cache_path]}/openoffice"
+  not_if { File.directory?("#{Chef::Config[:file_cache_path]}/openoffice/en-US") }
+end
+
+execute 'install-openoffice-debs' do
+  command "dpkg -i #{Chef::Config[:file_cache_path]}/openoffice/en-US/DEBS/*.deb"
+  not_if 'dpkg -s openoffice'
+end

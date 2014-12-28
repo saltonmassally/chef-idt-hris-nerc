@@ -11,8 +11,8 @@ depends "supervisor"
 depends "nginx"
 depends "postgresql"
 depends "java"
-depends "openoffice"
 depends "idt_infra_tools"
+depends 'tar'
 
 
 

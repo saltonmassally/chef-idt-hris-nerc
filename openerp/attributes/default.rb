@@ -48,14 +48,16 @@ default[:openerp][:aws_access_key] = 'secret'
 default[:openerp][:aws_secret_key] = 'secret'
 default[:openerp][:route53_zone_id] = ''
 default[:openerp][:domain] = ''
-default[:openerp][:workers] = 3
+default[:openerp][:workers] = 0
 default[:openerp][:elastic_ip] = ''
 default[:openerp][:static_http_document_root] = '/var/www/'
 default[:openerp][:static_http_url_prefix]= '/static'
 
 default[:openerp][:ssl_public] = '/etc/nginx/ssh/server.crt'
 default[:openerp][:ssl_private] = '/etc/nginx/ssh/server.pem'
-  
+
+default[:openerp][:openoffice_deb_url]  = 'http://cdn.mirror.garr.it/sf/project/openofficeorg.mirror/4.1.1/binaries/en-US/Apache_OpenOffice_4.1.1_Linux_x86-64_install-deb_en-US.tar.gz'
+ 
 default[:openerp][:update_command] = ''
 
 override['supervisor']['inet_port'] = '9001'
