@@ -25,6 +25,7 @@ default[:openerp][:pip_packages] = %w[
   dedupe
   datadiff
   https://launchpad.net/aeroolib/trunk/1.0.0/+download/aeroolib.tar.gz
+  gevent
 ]
   
 #default[:openerp][:database][:name] = node[:opsworks][:stack][:rds_instances][:db_name]
