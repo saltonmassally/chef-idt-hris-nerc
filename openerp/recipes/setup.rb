@@ -91,3 +91,10 @@ execute 'install-openoffice-debs' do
   command "dpkg -i #{Chef::Config[:file_cache_path]}/openoffice/en-US/DEBS/*.deb"
   not_if 'dpkg -s openoffice'
 end
+
+bash "link_openoffice" do
+    code <<-EOH
+    ln -s /opt/openoffice4/program/soffice /usr/lib
+    EOH
+    not_if { ::File.exists?('/usr/lib/soffice') }
+  end
