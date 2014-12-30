@@ -94,7 +94,7 @@ end
 
 bash "link_openoffice" do
     code <<-EOH
-    ln -s /opt/openoffice4/program/soffice /usr/lib
+    ln -s /opt/openoffice4/program/soffice /usr/bin
     EOH
-    not_if { ::File.exists?('/usr/lib/soffice') }
+    not_if { ::File.exists?('/usr/bin/soffice') }
   end
